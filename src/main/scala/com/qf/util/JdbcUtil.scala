@@ -17,6 +17,14 @@ object JdbcUtil {
   private val connection_num = 10 //产生连接数
   private val pools = new util.LinkedList[Connection] //连接池
 
+
+  /**
+    * 初始化连接池
+    */
+  for (i <- 1 to max_connection) {
+    pools.push(initConn())
+  }
+
   /**
     * 获得连接数
     */
@@ -32,14 +40,7 @@ object JdbcUtil {
     connection
   }
 
-  /**
-    * 初始化连接池
-    */
-  private def initConnectionPool() = {
-    for (i <- 1 to max_connection) {
-      pools.push(initConn())
-    }
-  }
+
 
   /**
     * 获得连接
